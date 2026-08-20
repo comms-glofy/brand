@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comms & Branding Kit · Glofy</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/comms-glofy/glofy-assets/refs/heads/main/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#212121;
+    --bg2:#383838;
+    --lime:#ceff00;
+    --gray:#e1e1e1;
+    --off:#ededed;
+    --bg2-soft:#2c2c2c;
+    --border:rgba(225,225,225,.10);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--off);
+    font-family:'Montserrat',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; gap:16px;
+    padding:14px 24px;
+    background:rgba(33,33,33,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .brand{
+    display:flex; align-items:center; gap:9px;
+    font-weight:800; letter-spacing:.3px; font-size:15px;
+    white-space:nowrap;
+  }
+  .brand img{height:24px; width:auto; display:block;}
+  .brand span{color:var(--lime);}
+  .search-wrap{
+    flex:1; max-width:420px; margin-left:auto;
+    position:relative;
+  }
+  .search-wrap input{
+    width:100%;
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:9px 16px 9px 36px;
+    color:var(--off);
+    font-family:inherit; font-size:13px;
+    outline:none;
+    transition:border-color .15s;
+  }
+  .search-wrap input:focus{border-color:var(--lime);}
+  .search-wrap svg{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    opacity:.55; pointer-events:none;
+  }
+  .updated-tag{
+    font-size:11px; color:var(--gray); opacity:.55; white-space:nowrap;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:230px minmax(0,1fr);
+    max-width:1180px;
+    margin:0 auto;
+  }
+  nav.side{
+    position:sticky; top:57px;
+    align-self:start;
+    height:calc(100vh - 57px);
+    overflow-y:auto;
+    padding:28px 12px 40px 24px;
+  }
+  nav.side .group-label{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--gray); opacity:.45; margin:22px 0 8px; font-weight:700;
+  }
+  nav.side .group-label:first-child{margin-top:0;}
+  nav.side a{
+    display:block; text-decoration:none;
+    font-size:13.5px; color:var(--gray);
+    padding:7px 10px; border-radius:8px;
+    margin-bottom:2px;
+    border-left:2px solid transparent;
+    transition:background .15s,color .15s,border-color .15s;
+  }
+  nav.side a:hover{background:var(--bg2-soft); color:var(--off);}
+  nav.side a.active{
+    color:var(--lime); border-left-color:var(--lime);
+    background:rgba(206,255,0,.06);
+    font-weight:600;
+  }
+
+  main{padding:36px 28px 100px;}
+
+  .hero{padding:18px 0 34px; border-bottom:1px solid var(--border); margin-bottom:34px;}
+  .hero .eyebrow{
+    color:var(--lime); font-size:12px; font-weight:700;
+    letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px;
+  }
+  .hero h1{font-size:30px; line-height:1.2; margin:0 0 12px; font-weight:800;}
+  .hero p{color:var(--gray); font-size:14.5px; line-height:1.6; max-width:620px; margin:0;}
+
+  section.block{scroll-margin-top:70px; margin-bottom:48px;}
+  section.block .block-head{margin-bottom:16px;}
+  section.block h2{font-size:19px; margin:0 0 6px; font-weight:700;}
+  section.block .block-desc{color:var(--gray); font-size:13.5px; line-height:1.55; max-width:640px; opacity:.85;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;}
+  .grid.two{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+
+  .card{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+    display:flex; flex-direction:column; gap:10px;
+    transition:transform .15s, border-color .15s;
+  }
+  .card:hover{border-color:rgba(206,255,0,.35);}
+  .card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
+  .card h3{font-size:15px; margin:0; font-weight:700;}
+  .card p{font-size:13px; color:var(--gray); line-height:1.55; margin:0; opacity:.9;}
+  .badge{
+    flex-shrink:0;
+    background:var(--lime); color:#1a1a1a;
+    font-size:10px; font-weight:800; letter-spacing:.04em;
+    padding:4px 9px; border-radius:999px;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .btn-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:4px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:6px;
+    text-decoration:none;
+    font-size:12.5px; font-weight:600;
+    padding:8px 14px; border-radius:8px;
+    background:var(--lime); color:#1a1a1a;
+    transition:filter .15s;
+  }
+  .btn:hover{filter:brightness(1.08);}
+  .btn.ghost{
+    background:transparent; color:var(--off);
+    border:1px solid var(--border);
+  }
+  .btn.ghost:hover{border-color:var(--lime); color:var(--lime);}
+
+  /* palette mini section */
+  .palette-card{
+    background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px; margin-top:14px;
+  }
+  .palette-card .ptitle{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--gray); opacity:.6; margin-bottom:12px; font-weight:700;}
+  .swatches{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px;}
+  .swatch{
+    display:flex; align-items:center; gap:8px;
+    background:var(--bg); border:1px solid var(--border);
+    border-radius:10px; padding:6px 10px 6px 6px;
+    cursor:pointer; font-size:11.5px;
+    transition:border-color .15s;
+  }
+  .swatch:hover{border-color:var(--lime);}
+  .swatch .chip{width:22px; height:22px; border-radius:6px; border:1px solid rgba(255,255,255,.12); flex-shrink:0;}
+  .swatch .lbl{display:flex; flex-direction:column; line-height:1.25;}
+  .swatch .lbl b{font-size:11px; font-weight:600;}
+  .swatch .lbl span{opacity:.55; font-size:10px;}
+  .font-line{font-size:13px; color:var(--gray);}
+  .font-line b{color:var(--off); font-weight:700;}
+  .copy-hint{font-size:10.5px; opacity:.45; margin-top:4px;}
+
+  /* logo format cards */
+  .fmt-card .fmt-tag{
+    align-self:flex-start;
+    font-size:10px; font-weight:800; letter-spacing:.06em;
+    color:var(--bg); background:var(--gray);
+    padding:3px 8px; border-radius:5px; text-transform:uppercase;
+  }
+
+  /* slack + signature note cards */
+  .note-card{
+    background:var(--bg2-soft); border:1px dashed var(--border);
+    border-radius:var(--radius); padding:18px 20px;
+    display:flex; gap:14px; align-items:flex-start;
+  }
+  .note-card .ico{font-size:20px; line-height:1;}
+  .note-card p{margin:0; font-size:13px; color:var(--gray); line-height:1.6;}
+  .note-card code{
+    background:var(--bg); padding:2px 7px; border-radius:5px;
+    color:var(--lime); font-size:12.5px;
+  }
+
+  /* coming soon */
+  .soon-card{
+    background:repeating-linear-gradient(135deg,var(--bg2) 0 10px, var(--bg2-soft) 10px 20px);
+    border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px; opacity:.9;
+  }
+  .soon-card .badge.soon{background:var(--gray); color:#1a1a1a;}
+  .soon-card h3{margin:8px 0 8px;}
+  .soon-card p{font-size:13px; color:var(--gray); line-height:1.6; margin:0 0 4px;}
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:28px 0 10px; margin-top:10px;
+    font-size:12.5px; color:var(--gray); opacity:.6;
+  }
+
+  .hidden{display:none !important;}
+
+  /* mobile */
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    nav.side{
+      position:static; height:auto;
+      display:flex; overflow-x:auto; gap:4px;
+      padding:14px 16px; border-bottom:1px solid var(--border);
+    }
+    nav.side .group-label{display:none;}
+    nav.side a{white-space:nowrap; border-left:none; border-bottom:2px solid transparent;}
+    nav.side a.active{border-left:none; border-bottom-color:var(--lime);}
+    main{padding:24px 18px 80px;}
+    .search-wrap{max-width:none;}
+    .topbar{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <img src="https://raw.githubusercontent.com/comms-glofy/glofy-assets/refs/heads/main/logo-rebrand-glofy.png" alt="Glofy">
+    Comms Dept.
+  </div>
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="searchInput" type="text" placeholder="Buscar: logo, banner, fondo, brochure...">
+  </div>
+  <div class="updated-tag">Última actualización del kit: ago 2026</div>
+</div>
+
+<div class="layout">
+  <nav class="side" id="sideNav">
+    <div class="group-label">Identidad de marca</div>
+    <a href="#marca">Manual de marca</a>
+    <a href="#brochure">Brochure</a>
+    <a href="#stories">Success Stories</a>
+
+    <div class="group-label">Logo</div>
+    <a href="#logo-uso">Guía de uso</a>
+    <a href="#logo-formatos">Formatos (favicon, PNG, SVG, AI)</a>
+
+    <div class="group-label">Fondos & Banners</div>
+    <a href="#fondos">Fondos</a>
+    <a href="#banners">Banners</a>
+
+    <div class="group-label">Identidad digital</div>
+    <a href="#redes">Ícono para redes / login</a>
+    <a href="#slack">Emojis de Slack</a>
+    <a href="#firma">Firma de mail</a>
+
+    <div class="group-label">Fotografía</div>
+    <a href="#fotos">Fotos corporativas</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">Recurso interno · Glofy</div>
+      <h1>Comms & Branding Kit</h1>
+      <p>¿Dónde está el logo, cuál es el banner actualizado, qué colores usamos? Para dar respuesta rápida a estas solicitudes, ponemos a disposición todo en un solo lugar. Usá el buscador de arriba o el menú lateral para ir directo a lo que necesitás.</p>
+    </div>
+
+    <!-- MANUAL DE MARCA -->
+    <section class="block" id="marca" data-keywords="manual marca brand book colores paleta tipografia fuente montserrat">
+      <div class="block-head">
+        <h2>Manual de marca</h2>
+        <p class="block-desc">El documento completo con lineamientos de identidad visual, tono de comunicación y aplicaciones de marca.</p>
+      </div>
+      <div class="card" style="max-width:520px;">
+        <div class="card-top">
+          <h3>Manual de marca completo</h3>
+        </div>
+        <p>Guía integral de identidad: paleta, tipografía, usos correctos e incorrectos, y aplicaciones de marca.</p>
+        <div class="btn-row">
+          <a class="btn" href="https://drive.google.com/drive/folders/1bPQBH-Ahoqwirutf3dFwiLhuyTvvv0lw?usp=drive_link" target="_blank" rel="noopener">Abrir manual completo →</a>
+        </div>
+      </div>
+
+      <div class="palette-card">
+        <div class="ptitle">Referencia rápida, sin abrir el manual</div>
+        <div class="swatches">
+          <div class="swatch" onclick="copyHex('#212121',this)"><div class="chip" style="background:#212121"></div><div class="lbl"><b>Dark</b><span>#212121</span></div></div>
+          <div class="swatch" onclick="copyHex('#383838',this)"><div class="chip" style="background:#383838"></div><div class="lbl"><b>Dark 2</b><span>#383838</span></div></div>
+          <div class="swatch" onclick="copyHex('#CEFF00',this)"><div class="chip" style="background:#CEFF00"></div><div class="lbl"><b>Lima (principal)</b><span>#CEFF00</span></div></div>
+          <div class="swatch" onclick="copyHex('#E1E1E1',this)"><div class="chip" style="background:#E1E1E1"></div><div class="lbl"><b>Gris claro</b><span>#E1E1E1</span></div></div>
+          <div class="swatch" onclick="copyHex('#EDEDED',this)"><div class="chip" style="background:#EDEDED"></div><div class="lbl"><b>Off-white</b><span>#EDEDED</span></div></div>
+        </div>
+        <div class="font-line">Tipografía: <b>Montserrat</b> (familia completa, todos los pesos)</div>
+        <div class="copy-hint">Click en un color para copiar el HEX</div>
+      </div>
+    </section>
+
+    <!-- BROCHURE -->
+    <section class="block" id="brochure" data-keywords="brochure pdf presentacion comercial">
+      <div class="block-head">
+        <h2>Brochure institucional</h2>
+        <p class="block-desc">Presentación en PDF para compartir con clientes o candidatos.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-top">
+            <h3>Brochure Glofy (PDF)</h3>
+            <span class="badge">Actualizado</span>
+          </div>
+          <p>Es la última versión vigente. En caso de tener una copia guardada de antes, te pedimos que la reemplaces por esta.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://drive.google.com/drive/folders/1eA5qVDE12Tw4DIY487-_PuAhJZ4F1RNf?usp=drive_link" target="_blank" rel="noopener">Descargar brochure →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESS STORIES -->
+    <section class="block" id="stories" data-keywords="success stories casos de exito testimonios">
+      <div class="block-head">
+        <h2>Success Stories</h2>
+        <p class="block-desc">Casos de éxito de clientes, listos para citar en propuestas, contenido o conversaciones comerciales.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-top"><h3>Repositorio de Success Stories</h3></div>
+          <p>Los dejamos organizados por cliente e industria, con resultados y contexto de cada colaboración.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://docs.glofy.co/stories" target="_blank" rel="noopener">Ver Success Stories →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO USO -->
+    <section class="block" id="logo-uso" data-keywords="logo uso reglas guia isotipo imagotipo">
+      <div class="block-head">
+        <h2>Guía de uso del logo</h2>
+        <p class="block-desc">Antes de usar el logo en cualquier pieza, te recomendamos revisar esta guía: explica los espacios mínimos, combinaciones de color permitidas y errores comunes a evitar.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-top"><h3>Documento de uso del logo</h3></div>
+          <p>Reglas de aplicación: versiones permitidas, márgenes de seguridad, fondos aptos y usos incorrectos.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://drive.google.com/file/d/1L2hwN70-vmbdL-G5lDvhJszQ-e_EzJQt/view?usp=drive_link" target="_blank" rel="noopener">Ver guía de uso →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO FORMATOS -->
+    <section class="block" id="logo-formatos" data-keywords="logo favicon png svg ai editable vector formatos">
+      <div class="block-head">
+        <h2>Formatos del logo</h2>
+        <p class="block-desc">Cada formato sirve para algo distinto. Si no estás seguro/a de cuál usar, te lo resolvemos acá en segundos.</p>
+      </div>
+      <div class="grid two">
+        <div class="card fmt-card">
+          <div class="card-top">
+            <h3>Favicon</h3>
+            <span class="fmt-tag">.ico / .png</span>
+          </div>
+          <p>Es el ícono pequeño y cuadrado que representa a Glofy en la pestaña del navegador, accesos directos y apps. Lo pensamos para espacios muy chicos, donde el logo completo no entra.</p>
+          <div class="btn-row">
+            <a class="btn ghost" href="https://drive.google.com/file/d/1uI5aWUBtKqGYWAqxzDFjfI9so_2S4Y46/view?usp=drive_link" target="_blank" rel="noopener">Descargar favicon →</a>
+          </div>
+        </div>
+
+        <div class="card fmt-card">
+          <div class="card-top">
+            <h3>Logos en PNG</h3>
+            <span class="fmt-tag">Imagen, tamaño fijo</span>
+          </div>
+          <p>Formato de imagen con fondo transparente. Lo recomendamos para usar tal cual, sin editar: presentaciones, documentos, Slack, mails o cualquier pieza donde no necesites agrandarlo mucho.</p>
+          <div class="btn-row">
+            <a class="btn ghost" href="https://drive.google.com/drive/folders/1zlr93lkQUZu0AXEK32wqw0fnZSI6yNV7?usp=drive_link" target="_blank" rel="noopener">Ver carpeta PNG →</a>
+          </div>
+        </div>
+
+        <div class="card fmt-card">
+          <div class="card-top">
+            <h3>Logos en SVG</h3>
+            <span class="fmt-tag">Vectorial, escalable</span>
+          </div>
+          <p>Formato vectorial: se puede agrandar o achicar a cualquier tamaño sin perder calidad. Es el que recomendamos para desarrollo web, impresión grande o banners.</p>
+          <div class="btn-row">
+            <a class="btn ghost" href="https://drive.google.com/drive/folders/1ZjJ7a6FFTu-qLUOk-5agXT8SQMn8O3Rq?usp=drive_link" target="_blank" rel="noopener">Ver carpeta SVG →</a>
+          </div>
+        </div>
+
+        <div class="card fmt-card">
+          <div class="card-top">
+            <h3>Editable (.AI)</h3>
+            <span class="fmt-tag">A pedido</span>
+          </div>
+          <p>Archivo fuente editable en Adobe Illustrator. Es el "original" del que salen todos los demás formatos: se usa solo para modificar o adaptar el logo, no para pegarlo directo en una pieza. Lo enviamos únicamente cuando alguien lo solicita, por ejemplo una imprenta o un proveedor externo que lo necesite para producción.</p>
+          <div class="btn-row">
+            <a class="btn ghost" href="mailto:comms@glofy.co?subject=Solicito%20el%20archivo%20.AI%20del%20logo" target="_blank" rel="noopener">Solicitar por mail →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FONDOS -->
+    <section class="block" id="fondos" data-keywords="fondo videollamada zoom meet escritorio wallpaper background">
+      <div class="block-head">
+        <h2>Fondos</h2>
+        <p class="block-desc">Para videollamadas y para tu escritorio, con la identidad de Glofy.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-top">
+            <h3>Fondo para videollamadas</h3>
+            <span class="badge">Actualizado</span>
+          </div>
+          <p>Es la última versión, lista para usar en Meet, Zoom o Teams.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://drive.google.com/file/d/1x0UzEff6On29-Kj3jLoCY_9PiLJiUT3M/view?usp=sharing" target="_blank" rel="noopener">Descargar fondo →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-top"><h3>Fondos de escritorio</h3></div>
+          <p>Te dejamos wallpapers de marca para tu computadora, varias opciones a elección.</p>
+          <div class="btn-row">
+            <a class="btn ghost" href="https://drive.google.com/drive/folders/1sKmBlbkh3gB_-E97D2J9ollKpRWbhATy?usp=drive_link" target="_blank" rel="noopener">Ver fondos de escritorio →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNERS -->
+    <section class="block" id="banners" data-keywords="banner linkedin documentos google docs firma header">
+      <div class="block-head">
+        <h2>Banners</h2>
+        <p class="block-desc">Para tu perfil de LinkedIn y para encabezar documentos de Google.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-top">
+            <h3>Banner de LinkedIn</h3>
+            <span class="badge">Actualizado</span>
+          </div>
+          <p>Es la imagen de portada para tu perfil personal de LinkedIn, última versión.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://drive.google.com/file/d/1-lcmEsJUWV_traQG5OIEEoxwCFbqnA7W/view?usp=sharing" target="_blank" rel="noopener">Descargar banner →</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-top"><h3>Banner para documentos</h3></div>
+          <p>Te dejamos el encabezado de marca para usar en documentos de Google (propuestas, reportes, informes).</p>
+          <div class="btn-row">
+            <a class="btn ghost" href="https://drive.google.com/drive/folders/12euGsV99uCo1Dv3vf21653oI5UIlXrwt?usp=drive_link" target="_blank" rel="noopener">Ver carpeta →</a>
+            <a class="btn ghost" href="https://docs.glofy.co/banners-google" target="_blank" rel="noopener">Instructivo de uso →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REDES / LOGIN -->
+    <section class="block" id="redes" data-keywords="logo redes sociales login sesion perfil isotipo icono g avatar">
+      <div class="block-head">
+        <h2>Ícono para redes y perfiles (isotipo)</h2>
+        <p class="block-desc">Es la versión reducida del logo: solo la letra "G". La llamamos <b>isotipo</b>.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-top"><h3>Isotipo: ícono "G"</h3></div>
+          <p>Te recomendamos usarlo cuando necesites iniciar sesión en una plataforma o cargar una foto de perfil pequeña (redes sociales, apps, Slack), donde el logo completo no entra bien. En piezas grandes, en cambio, va el logo completo.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://drive.google.com/file/d/13pcrJMfUaLydnqA5x3TVMPpy9IFna0BX/view?usp=sharing" target="_blank" rel="noopener">Descargar isotipo →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLACK -->
+    <section class="block" id="slack" data-keywords="slack emojis stickers glofy custom">
+      <div class="block-head">
+        <h2>Emojis personalizados de Slack</h2>
+      </div>
+      <div class="note-card">
+        <div class="ico">🙂</div>
+        <p>Escribí <code>:glofy</code> en cualquier mensaje de Slack y vas a ver todas las opciones disponibles. Los pensamos para sumarle identidad, color y onda a tus mensajes del día a día.</p>
+      </div>
+    </section>
+
+    <!-- FIRMA -->
+    <section class="block" id="firma" data-keywords="firma mail email foto perfil brandeada gmail outlook">
+      <div class="block-head">
+        <h2>Firma de mail y foto de perfil</h2>
+      </div>
+      <div class="note-card">
+        <div class="ico">✉️</div>
+        <p>Ya te enviamos tu firma de mail y tu foto de perfil brandeada desde Comms. En caso de necesitar actualizarlas, o si nunca te llegaron, escribinos a <code>comms@glofy.co</code> y te las volvemos a mandar.</p>
+      </div>
+    </section>
+
+    <!-- FOTOS -->
+    <section class="block" id="fotos" data-keywords="fotos corporativas fotografia institucional apellido">
+      <div class="block-head">
+        <h2>Fotos corporativas</h2>
+        <p class="block-desc">Cada colaborador/a tiene su propia carpeta de fotos.</p>
+      </div>
+      <div class="soon-card">
+        <span class="badge soon">Próximamente</span>
+        <h3>Acceso por apellido</h3>
+        <p>Desde Comms estamos armando un sistema para que cada persona acceda únicamente a su propia carpeta de fotos, buscando por apellido, sin ver las del resto del equipo.</p>
+        <p>Mientras tanto, te contamos que el mail con tus fotos ya fue enviado hace un tiempo: te recomendamos revisar tu casilla. En caso de no encontrarlo, escribinos a <code style="background:var(--bg);padding:2px 7px;border-radius:5px;color:var(--lime);">comms@glofy.co</code>.</p>
+      </div>
+    </section>
+
+    <footer>
+      En caso de no encontrar lo que buscabas, escribinos a <b style="color:var(--off)">comms@glofy.co</b>. Este es el Comms & Branding Kit interno de Glofy.
+    </footer>
+  </main>
+</div>
+
+<script>
+  // Buscador: filtra secciones por palabras clave
+  const input = document.getElementById('searchInput');
+  const sections = Array.from(document.querySelectorAll('section.block'));
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    sections.forEach(sec => {
+      const kw = (sec.dataset.keywords || '') + ' ' + sec.innerText.toLowerCase();
+      sec.classList.toggle('hidden', q.length > 0 && !kw.toLowerCase().includes(q));
+    });
+  });
+
+  // Copiar HEX al portapapeles
+  function copyHex(hex, el){
+    navigator.clipboard.writeText(hex).then(() => {
+      const lbl = el.querySelector('.lbl b');
+      const original = lbl.textContent;
+      lbl.textContent = '¡Copiado!';
+      setTimeout(() => { lbl.textContent = original; }, 1000);
+    });
+  }
+
+  // Resaltar sección activa en el nav lateral
+  const navLinks = Array.from(document.querySelectorAll('#sideNav a'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = navLinks.find(a => a.getAttribute('href') === '#' + id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  sections.forEach(sec => observer.observe(sec));
+</script>
+
+</body>
+</html>
