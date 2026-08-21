@@ -158,6 +158,19 @@
   }
   .btn.ghost:hover{border-color:var(--lime); color:var(--lime);}
 
+  .card-media{
+    flex-direction:row; padding:0; max-width:640px; overflow:hidden;
+  }
+  .card-media .card-media-img{
+    width:150px; flex-shrink:0; object-fit:cover; display:block;
+  }
+  .card-media .card-media-body{
+    padding:18px 20px; display:flex; flex-direction:column; gap:8px; flex:1; min-width:0;
+  }
+
+  .img-card{padding:16px; overflow:hidden; background:var(--bg2); display:flex; align-items:center; justify-content:center; min-height:220px;}
+  .img-card img{width:100%; height:100%; object-fit:contain; display:block;}
+
   /* palette mini section */
   .palette-card{
     background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
@@ -231,9 +244,16 @@
     nav.side .group-label{display:none;}
     nav.side a{white-space:nowrap; border-left:none; border-bottom:2px solid transparent;}
     nav.side a.active{border-left:none; border-bottom-color:var(--lime);}
+    .brand img{height:20px;}
+    .brand{font-size:13.5px;}
     main{padding:24px 18px 80px;}
-    .search-wrap{max-width:none;}
-    .topbar{flex-wrap:wrap;}
+    .search-wrap{max-width:none; order:3; flex-basis:100%;}
+    .topbar{flex-wrap:wrap; padding:12px 16px; gap:10px;}
+    .updated-tag{order:2; margin-left:auto; font-size:10px;}
+    .hero h1{font-size:24px;}
+    .img-card{min-height:150px;}
+    .card-media{flex-direction:column;}
+    .card-media .card-media-img{width:100%; height:130px;}
   }
 </style>
 </head>
@@ -257,6 +277,7 @@
     <a href="#marca">Manual de marca</a>
     <a href="#brochure">Brochure</a>
     <a href="#stories">Success Stories</a>
+    <a href="#banco-imagenes">Banco de imágenes</a>
 
     <div class="group-label">Logo</div>
     <a href="#logo-uso">Guía de uso</a>
@@ -286,15 +307,18 @@
     <section class="block" id="marca" data-keywords="manual marca brand book colores paleta tipografia fuente montserrat">
       <div class="block-head">
         <h2>Manual de marca</h2>
-        <p class="block-desc">El documento completo con lineamientos de identidad visual, tono de comunicación y aplicaciones de marca.</p>
+        <p class="block-desc">Lineamientos de identidad visual, tono de comunicación y aplicaciones de marca.</p>
       </div>
-      <div class="card" style="max-width:520px;">
-        <div class="card-top">
-          <h3>Manual de marca completo</h3>
-        </div>
-        <p>Guía integral de identidad: paleta, tipografía, usos correctos e incorrectos, y aplicaciones de marca.</p>
-        <div class="btn-row">
-          <a class="btn" href="https://drive.google.com/drive/folders/1bPQBH-Ahoqwirutf3dFwiLhuyTvvv0lw?usp=drive_link" target="_blank" rel="noopener">Abrir manual completo →</a>
+      <div class="card card-media" style="max-width:520px;">
+        <img class="card-media-img" src="https://raw.githubusercontent.com/comms-glofy/brand/refs/heads/main/brandbook.png" alt="Manual de marca Glofy">
+        <div class="card-media-body">
+          <div class="card-top">
+            <h3>Manual de marca completo</h3>
+          </div>
+          <p>Paleta, tipografía, usos correctos e incorrectos y aplicaciones de marca.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://drive.google.com/drive/folders/1bPQBH-Ahoqwirutf3dFwiLhuyTvvv0lw?usp=drive_link" target="_blank" rel="noopener">Abrir manual completo →</a>
+          </div>
         </div>
       </div>
 
@@ -319,14 +343,17 @@
         <p class="block-desc">Presentación en PDF para compartir con clientes o candidatos.</p>
       </div>
       <div class="grid">
-        <div class="card">
-          <div class="card-top">
-            <h3>Brochure Glofy (PDF)</h3>
-            <span class="badge">Actualizado</span>
-          </div>
-          <p>Es la última versión vigente. En caso de tener una copia guardada de antes, te pedimos que la reemplaces por esta.</p>
-          <div class="btn-row">
-            <a class="btn" href="https://drive.google.com/drive/folders/1eA5qVDE12Tw4DIY487-_PuAhJZ4F1RNf?usp=drive_link" target="_blank" rel="noopener">Descargar brochure →</a>
+        <div class="card card-media">
+          <img class="card-media-img" src="https://raw.githubusercontent.com/comms-glofy/brand/refs/heads/main/brochure.png" alt="Brochure institucional Glofy">
+          <div class="card-media-body">
+            <div class="card-top">
+              <h3>Brochure Glofy (PDF)</h3>
+              <span class="badge">Actualizado</span>
+            </div>
+            <p>Última versión vigente. Reemplazá cualquier copia anterior que tengas guardada.</p>
+            <div class="btn-row">
+              <a class="btn" href="https://drive.google.com/drive/folders/1eA5qVDE12Tw4DIY487-_PuAhJZ4F1RNf?usp=drive_link" target="_blank" rel="noopener">Descargar brochure →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -339,11 +366,31 @@
         <p class="block-desc">Casos de éxito de clientes, listos para citar en propuestas, contenido o conversaciones comerciales.</p>
       </div>
       <div class="grid">
+        <div class="card card-media">
+          <img class="card-media-img" src="https://raw.githubusercontent.com/comms-glofy/brand/refs/heads/main/success.png" alt="Success Stories Glofy">
+          <div class="card-media-body">
+            <div class="card-top"><h3>Repositorio de Success Stories</h3></div>
+            <p>Organizados por cliente e industria, con resultados y contexto de cada colaboración.</p>
+            <div class="btn-row">
+              <a class="btn" href="https://docs.glofy.co/stories" target="_blank" rel="noopener">Ver Success Stories →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANCO DE IMÁGENES -->
+    <section class="block" id="banco-imagenes" data-keywords="banco de imagenes fotos posteos redes contenido aprobado">
+      <div class="block-head">
+        <h2>Banco de imágenes aprobado</h2>
+        <p class="block-desc">Imágenes curadas por el equipo de Comms para mantener coherencia visual y calidad en todos los posteos.</p>
+      </div>
+      <div class="grid">
         <div class="card">
-          <div class="card-top"><h3>Repositorio de Success Stories</h3></div>
-          <p>Los dejamos organizados por cliente e industria, con resultados y contexto de cada colaboración.</p>
+          <div class="card-top"><h3>Banco de imágenes</h3></div>
+          <p>Fotos listas para usar en publicaciones y piezas de comunicación.</p>
           <div class="btn-row">
-            <a class="btn" href="https://docs.glofy.co/stories" target="_blank" rel="noopener">Ver Success Stories →</a>
+            <a class="btn" href="https://drive.google.com/drive/folders/1R3zHQ6Lv80OSAXbsf1pNqi9t_k3wGSy3?usp=sharing" target="_blank" rel="noopener">Ver banco de imágenes →</a>
           </div>
         </div>
       </div>
@@ -353,12 +400,12 @@
     <section class="block" id="logo-uso" data-keywords="logo uso reglas guia isotipo imagotipo">
       <div class="block-head">
         <h2>Guía de uso del logo</h2>
-        <p class="block-desc">Antes de usar el logo en cualquier pieza, te recomendamos revisar esta guía: explica los espacios mínimos, combinaciones de color permitidas y errores comunes a evitar.</p>
+        <p class="block-desc">Espacios mínimos, colores permitidos y errores comunes a evitar antes de usar el logo.</p>
       </div>
       <div class="grid">
         <div class="card">
           <div class="card-top"><h3>Documento de uso del logo</h3></div>
-          <p>Reglas de aplicación: versiones permitidas, márgenes de seguridad, fondos aptos y usos incorrectos.</p>
+          <p>Versiones permitidas, márgenes de seguridad, fondos aptos y usos incorrectos.</p>
           <div class="btn-row">
             <a class="btn" href="https://drive.google.com/file/d/1L2hwN70-vmbdL-G5lDvhJszQ-e_EzJQt/view?usp=drive_link" target="_blank" rel="noopener">Ver guía de uso →</a>
           </div>
@@ -370,7 +417,7 @@
     <section class="block" id="logo-formatos" data-keywords="logo favicon png svg ai editable vector formatos">
       <div class="block-head">
         <h2>Formatos del logo</h2>
-        <p class="block-desc">Cada formato sirve para algo distinto. Si no estás seguro/a de cuál usar, te lo resolvemos acá en segundos.</p>
+        <p class="block-desc">Cada formato sirve para algo distinto. Elegí el que corresponda a tu pieza.</p>
       </div>
       <div class="grid two">
         <div class="card fmt-card">
@@ -378,7 +425,7 @@
             <h3>Favicon</h3>
             <span class="fmt-tag">.ico / .png</span>
           </div>
-          <p>Es el ícono pequeño y cuadrado que representa a Glofy en la pestaña del navegador, accesos directos y apps. Lo pensamos para espacios muy chicos, donde el logo completo no entra.</p>
+          <p>Ícono pequeño y cuadrado para pestañas del navegador, accesos directos y apps.</p>
           <div class="btn-row">
             <a class="btn ghost" href="https://drive.google.com/file/d/1uI5aWUBtKqGYWAqxzDFjfI9so_2S4Y46/view?usp=drive_link" target="_blank" rel="noopener">Descargar favicon →</a>
           </div>
@@ -389,7 +436,7 @@
             <h3>Logos en PNG</h3>
             <span class="fmt-tag">Imagen, tamaño fijo</span>
           </div>
-          <p>Formato de imagen con fondo transparente. Lo recomendamos para usar tal cual, sin editar: presentaciones, documentos, Slack, mails o cualquier pieza donde no necesites agrandarlo mucho.</p>
+          <p>Fondo transparente, para usar tal cual: presentaciones, documentos, Slack, mails.</p>
           <div class="btn-row">
             <a class="btn ghost" href="https://drive.google.com/drive/folders/1zlr93lkQUZu0AXEK32wqw0fnZSI6yNV7?usp=drive_link" target="_blank" rel="noopener">Ver carpeta PNG →</a>
           </div>
@@ -400,7 +447,7 @@
             <h3>Logos en SVG</h3>
             <span class="fmt-tag">Vectorial, escalable</span>
           </div>
-          <p>Formato vectorial: se puede agrandar o achicar a cualquier tamaño sin perder calidad. Es el que recomendamos para desarrollo web, impresión grande o banners.</p>
+          <p>Se agranda o achica sin perder calidad. Ideal para web, impresión grande o banners.</p>
           <div class="btn-row">
             <a class="btn ghost" href="https://drive.google.com/drive/folders/1ZjJ7a6FFTu-qLUOk-5agXT8SQMn8O3Rq?usp=drive_link" target="_blank" rel="noopener">Ver carpeta SVG →</a>
           </div>
@@ -411,10 +458,14 @@
             <h3>Editable (.AI)</h3>
             <span class="fmt-tag">A pedido</span>
           </div>
-          <p>Archivo fuente editable en Adobe Illustrator. Es el "original" del que salen todos los demás formatos: se usa solo para modificar o adaptar el logo, no para pegarlo directo en una pieza. Lo enviamos únicamente cuando alguien lo solicita, por ejemplo una imprenta o un proveedor externo que lo necesite para producción.</p>
+          <p>Archivo fuente en Illustrator, el "original" del que salen los demás formatos. Se usa solo para modificar el logo, no para pegarlo directo. Lo enviamos a pedido, por ejemplo a una imprenta o proveedor externo.</p>
           <div class="btn-row">
             <a class="btn ghost" href="mailto:comms@glofy.co?subject=Solicito%20el%20archivo%20.AI%20del%20logo" target="_blank" rel="noopener">Solicitar por mail →</a>
           </div>
+        </div>
+
+        <div class="card fmt-card img-card">
+          <img src="https://raw.githubusercontent.com/comms-glofy/brand/refs/heads/main/logos.png" alt="Variantes del logo Glofy">
         </div>
       </div>
     </section>
@@ -431,14 +482,14 @@
             <h3>Fondo para videollamadas</h3>
             <span class="badge">Actualizado</span>
           </div>
-          <p>Es la última versión, lista para usar en Meet, Zoom o Teams.</p>
+          <p>Última versión, lista para Meet, Zoom o Teams.</p>
           <div class="btn-row">
             <a class="btn" href="https://drive.google.com/file/d/1x0UzEff6On29-Kj3jLoCY_9PiLJiUT3M/view?usp=sharing" target="_blank" rel="noopener">Descargar fondo →</a>
           </div>
         </div>
         <div class="card">
           <div class="card-top"><h3>Fondos de escritorio</h3></div>
-          <p>Te dejamos wallpapers de marca para tu computadora, varias opciones a elección.</p>
+          <p>Wallpapers de marca para tu computadora, varias opciones a elección.</p>
           <div class="btn-row">
             <a class="btn ghost" href="https://drive.google.com/drive/folders/1sKmBlbkh3gB_-E97D2J9ollKpRWbhATy?usp=drive_link" target="_blank" rel="noopener">Ver fondos de escritorio →</a>
           </div>
@@ -458,14 +509,14 @@
             <h3>Banner de LinkedIn</h3>
             <span class="badge">Actualizado</span>
           </div>
-          <p>Es la imagen de portada para tu perfil personal de LinkedIn, última versión.</p>
+          <p>Portada para tu perfil personal de LinkedIn, última versión.</p>
           <div class="btn-row">
             <a class="btn" href="https://drive.google.com/file/d/1-lcmEsJUWV_traQG5OIEEoxwCFbqnA7W/view?usp=sharing" target="_blank" rel="noopener">Descargar banner →</a>
           </div>
         </div>
         <div class="card">
           <div class="card-top"><h3>Banner para documentos</h3></div>
-          <p>Te dejamos el encabezado de marca para usar en documentos de Google (propuestas, reportes, informes).</p>
+          <p>Encabezado de marca para documentos de Google: propuestas, reportes, informes.</p>
           <div class="btn-row">
             <a class="btn ghost" href="https://drive.google.com/drive/folders/12euGsV99uCo1Dv3vf21653oI5UIlXrwt?usp=drive_link" target="_blank" rel="noopener">Ver carpeta →</a>
             <a class="btn ghost" href="https://docs.glofy.co/banners-google" target="_blank" rel="noopener">Instructivo de uso →</a>
@@ -483,7 +534,7 @@
       <div class="grid">
         <div class="card">
           <div class="card-top"><h3>Isotipo: ícono "G"</h3></div>
-          <p>Te recomendamos usarlo cuando necesites iniciar sesión en una plataforma o cargar una foto de perfil pequeña (redes sociales, apps, Slack), donde el logo completo no entra bien. En piezas grandes, en cambio, va el logo completo.</p>
+          <p>Usalo para iniciar sesión o como foto de perfil chica (redes, apps, Slack), donde el logo completo no entra. En piezas grandes va el logo completo.</p>
           <div class="btn-row">
             <a class="btn" href="https://drive.google.com/file/d/13pcrJMfUaLydnqA5x3TVMPpy9IFna0BX/view?usp=sharing" target="_blank" rel="noopener">Descargar isotipo →</a>
           </div>
@@ -498,7 +549,7 @@
       </div>
       <div class="note-card">
         <div class="ico">🙂</div>
-        <p>Escribí <code>:glofy</code> en cualquier mensaje de Slack y vas a ver todas las opciones disponibles. Los pensamos para sumarle identidad, color y onda a tus mensajes del día a día.</p>
+        <p>Escribí <code>:glofy</code> en cualquier mensaje de Slack y vas a ver todas las opciones disponibles. Sumale identidad y color a tus mensajes.</p>
       </div>
     </section>
 
@@ -509,7 +560,7 @@
       </div>
       <div class="note-card">
         <div class="ico">✉️</div>
-        <p>Ya te enviamos tu firma de mail y tu foto de perfil brandeada desde Comms. En caso de necesitar actualizarlas, o si nunca te llegaron, escribinos a <code>comms@glofy.co</code> y te las volvemos a mandar.</p>
+        <p>Ya te enviamos tu firma de mail y tu foto de perfil brandeada. Si necesitás actualizarlas o no te llegaron, escribinos a <code>comms@glofy.co</code>.</p>
       </div>
     </section>
 
@@ -522,8 +573,8 @@
       <div class="soon-card">
         <span class="badge soon">Próximamente</span>
         <h3>Acceso por apellido</h3>
-        <p>Desde Comms estamos armando un sistema para que cada persona acceda únicamente a su propia carpeta de fotos, buscando por apellido, sin ver las del resto del equipo.</p>
-        <p>Mientras tanto, te contamos que el mail con tus fotos ya fue enviado hace un tiempo: te recomendamos revisar tu casilla. En caso de no encontrarlo, escribinos a <code style="background:var(--bg);padding:2px 7px;border-radius:5px;color:var(--lime);">comms@glofy.co</code>.</p>
+        <p>Estamos armando un sistema de acceso por apellido, para que cada persona vea solo su propia carpeta.</p>
+        <p>Mientras tanto, revisá tu casilla: el mail con tus fotos ya fue enviado. Si no lo encontrás, escribinos a <code style="background:var(--bg);padding:2px 7px;border-radius:5px;color:var(--lime);">comms@glofy.co</code>.</p>
       </div>
     </section>
 
