@@ -225,6 +225,46 @@
   .soon-card h3{margin:8px 0 8px;}
   .soon-card p{font-size:13px; color:var(--gray); line-height:1.6; margin:0 0 4px;}
 
+  /* buscador de fotos por apellido + fecha de nacimiento */
+  .photo-search-card{
+    background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px;
+  }
+  .photo-search-card .ps-label{
+    font-size:13px; color:var(--gray); margin-bottom:14px; display:block;
+  }
+  .ps-fields{display:flex; flex-wrap:wrap; gap:10px; max-width:460px;}
+  .ps-field{display:flex; flex-direction:column; gap:6px; flex:1; min-width:160px;}
+  .ps-field span{font-size:11px; color:var(--gray); opacity:.65;}
+  .ps-field input{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:11px 14px;
+    color:var(--off);
+    font-family:inherit; font-size:14px;
+    outline:none;
+    transition:border-color .15s;
+    color-scheme:dark;
+  }
+  .ps-field input:focus{border-color:var(--lime);}
+  .ps-submit-row{margin-top:14px;}
+  .ps-submit-row .btn{border:none; cursor:pointer; font-family:inherit;}
+  .ps-results{margin-top:14px; max-width:460px; display:flex; flex-direction:column; gap:6px;}
+  .ps-result{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--bg); border:1px solid var(--border); border-radius:9px;
+    padding:12px 14px;
+  }
+  .ps-result .ps-name{font-size:13.5px; font-weight:600;}
+  .ps-result a.btn{padding:7px 14px; font-size:12.5px;}
+  .ps-empty{
+    margin-top:14px; max-width:460px; font-size:12.5px; color:var(--gray); opacity:.85;
+    background:var(--bg); border:1px dashed var(--border); border-radius:9px; padding:12px 14px;
+  }
+  .ps-hint{font-size:11px; color:var(--gray); opacity:.5; margin-top:12px;}
+
   footer{
     border-top:1px solid var(--border);
     padding:28px 0 10px; margin-top:10px;
@@ -570,11 +610,25 @@
         <h2>Fotos corporativas</h2>
         <p class="block-desc">Cada colaborador/a tiene su propia carpeta de fotos.</p>
       </div>
-      <div class="soon-card">
-        <span class="badge soon">Próximamente</span>
-        <h3>Acceso por apellido</h3>
-        <p>Estamos armando un sistema de acceso por apellido, para que cada persona vea solo su propia carpeta.</p>
-        <p>Mientras tanto, revisá tu casilla: el mail con tus fotos ya fue enviado. Si no lo encontrás, escribinos a <code style="background:var(--bg);padding:2px 7px;border-radius:5px;color:var(--lime);">comms@glofy.co</code>.</p>
+      <div class="photo-search-card">
+        <label class="ps-label" for="photoApellido">Ingresá tu apellido y tu fecha de nacimiento para acceder a tu carpeta</label>
+        <form id="photoForm" autocomplete="off">
+          <div class="ps-fields">
+            <div class="ps-field">
+              <span>Apellido</span>
+              <input id="photoApellido" type="text" placeholder="Ej: Gauna" autocomplete="off">
+            </div>
+            <div class="ps-field">
+              <span>Fecha de nacimiento</span>
+              <input id="photoFecha" type="date">
+            </div>
+          </div>
+          <div class="ps-submit-row">
+            <button type="submit" class="btn">Ver mi carpeta →</button>
+          </div>
+        </form>
+        <div class="ps-results" id="photoResults"></div>
+        <p class="ps-hint">Cada persona accede únicamente al link de su propia carpeta. Si tus datos no coinciden o no te encontrás, escribinos a comms@glofy.co.</p>
       </div>
     </section>
 
@@ -585,6 +639,83 @@
 </div>
 
 <script>
+  // ------------------------------------------------------------------
+  // Acceso a fotos corporativas: apellido + fecha de nacimiento (ambos
+  // deben coincidir) para mostrar el link a la carpeta correspondiente.
+  const photoDirectory = [
+    { apellido: "Gauna", nombre: "Charo Gauna", fecha: "1994-09-30", link: "https://drive.google.com/drive/folders/1k6l_xtRfGPTm9jm3aVnllYcQ7y1q_nQw?usp=drive_link" },
+    { apellido: "Alturria", nombre: "Agustín Alturria", fecha: "1985-09-14", link: "https://drive.google.com/drive/folders/1-cieG_O_wFkvDMhmKUQ8dOzX6Qi08Kni?usp=drive_link" },
+    { apellido: "Ulla", nombre: "Daiana Ulla", fecha: "1995-07-26", link: "https://drive.google.com/drive/folders/1ut9UJjHXKj5zHRRhiFcNHXhebsJF3l0e?usp=drive_link" },
+    { apellido: "Molina", nombre: "Paula Molina", fecha: "1995-11-24", link: "https://drive.google.com/drive/folders/1gc7XYU3RA7kQVRGLm1X-HJFDYSe345QA?usp=drive_link" },
+    { apellido: "Prieto", nombre: "Valentina Prieto", fecha: "1997-04-09", link: "https://drive.google.com/drive/folders/1a-6F_MUKpguWgP_5kU2DBJ_zRo75inPe?usp=drive_link" },
+    { apellido: "Artaza", nombre: "Alejandra Artaza", fecha: "1985-06-20", link: "https://drive.google.com/drive/folders/1pN37qdz8_gM93O8e45Vk1ktvKABWf0kR?usp=drive_link" },
+    { apellido: "Toledo", nombre: "Tomás Toledo", fecha: "1998-04-08", link: "https://drive.google.com/drive/folders/1ol8YpBFdkNOl89s-CFvehZU34R5Z1nO9?usp=drive_link" },
+    { apellido: "Mendieta", nombre: "Valentina Mendieta", fecha: "2000-02-28", link: "https://drive.google.com/drive/folders/1GmJaHulCEb4uft2LvbAXVpG3Q2aiSLI0?usp=drive_link" },
+    { apellido: "Porta Guardia", nombre: "Cecilia Porta Guardia", fecha: "1994-04-14", link: "https://drive.google.com/drive/folders/1ozOOHzKw31YsXP8ViSL4GOxyl8aqhHXM?usp=drive_link" },
+    { apellido: "Sottomano", nombre: "Lara Sottomano", fecha: "1994-02-07", link: "https://drive.google.com/drive/folders/1Yye-pnswMtDhN5KYLJYoOkH_dhk9CnVc?usp=drive_link" },
+    { apellido: "Giovan", nombre: "Paula Giovan", fecha: "1996-07-26", link: "https://drive.google.com/drive/folders/1LBFcZp1PH1IOWUD1Qzz7K5HHlm1RSXrA?usp=drive_link" },
+    { apellido: "Lombardi", nombre: "Agustina Lombardi", fecha: "1996-05-13", link: "https://drive.google.com/drive/folders/1b9FM96LlWnUTeLshvcWyVbf_aZfAlbdI?usp=drive_link" },
+    { apellido: "Scarpeccio", nombre: "Lucía Scarpeccio", fecha: "2001-01-13", link: "https://drive.google.com/drive/folders/1IWYXQyt5faKkQXmXgbpO_gb-UVuPpOKb?usp=drive_link" },
+    { apellido: "Ballar", nombre: "Cindy Ballar", fecha: "1992-10-13", link: "https://drive.google.com/drive/folders/1iLiHfLu_KUqZ6NdOS2VLsEY1ZReDm70S?usp=drive_link" },
+    { apellido: "Hemmerling", nombre: "Verónica Hemmerling", fecha: "1985-08-21", link: "https://drive.google.com/drive/folders/1rXXe_DeWkYvleZj9fsX7UWvOyuiTflrE?usp=drive_link" },
+    { apellido: "Hofer", nombre: "Germán Hofer", fecha: "1995-05-07", link: "https://drive.google.com/drive/folders/1poe0IISDgfcoQp-VdDHApH0fJn4BdgFX?usp=drive_link" },
+    { apellido: "Rosa", nombre: "Gonzalo Rosa", fecha: "1994-08-04", link: "https://drive.google.com/drive/folders/1scnFefOG1jLkpdm2pPinAxUu5UBdK4HI?usp=drive_link" },
+    { apellido: "Gómez", nombre: "Facundo Gómez", fecha: "2002-12-23", link: "https://drive.google.com/drive/folders/1hQxY3SS-RTwnGYIoJsClvPzu98M7VYXH?usp=drive_link" },
+    { apellido: "Gómez", nombre: "Evangelina Gómez", fecha: "1996-06-23", link: "https://drive.google.com/drive/folders/1Llpit2NI0t1YS4jzWJlVj9zjhVmQPbYd?usp=drive_link" },
+    { apellido: "Ibargoyen Garro", nombre: "Iñaki Ibargoyen Garro", fecha: "1998-09-04", link: "https://drive.google.com/drive/folders/1CKJofvM-QhPK5SVlCz8mLJ8I-w1aEpSq?usp=drive_link" },
+    { apellido: "Dos Santos Botta", nombre: "Lucía Dos Santos Botta", fecha: "1997-04-17", link: "https://drive.google.com/drive/folders/1idFmSSj7aDqswh-xtUF3WtNa6EVuW4de?usp=drive_link" },
+    { apellido: "Elías", nombre: "Diego Elías", fecha: "1994-04-20", link: "https://drive.google.com/drive/folders/1-o0ZEqi3eyCJVub0pAr-a8UUhs7NSXA-?usp=drive_link" },
+  ];
+
+  function normalizeText(str){
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '');
+  }
+
+  const photoForm = document.getElementById('photoForm');
+  const photoApellido = document.getElementById('photoApellido');
+  const photoFecha = document.getElementById('photoFecha');
+  const photoResults = document.getElementById('photoResults');
+
+  if (photoForm) {
+    photoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      photoResults.innerHTML = '';
+
+      const apellidoQ = normalizeText(photoApellido.value.trim());
+      const fechaQ = photoFecha.value;
+
+      if (apellidoQ.length < 2 || !fechaQ) {
+        const empty = document.createElement('div');
+        empty.className = 'ps-empty';
+        empty.textContent = 'Completá tu apellido y tu fecha de nacimiento para continuar.';
+        photoResults.appendChild(empty);
+        return;
+      }
+
+      const matches = photoDirectory.filter(p =>
+        normalizeText(p.apellido).includes(apellidoQ) && p.fecha === fechaQ
+      );
+
+      if (matches.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'ps-empty';
+        empty.textContent = 'Los datos no coinciden. Verificá el apellido y la fecha, o escribinos a comms@glofy.co.';
+        photoResults.appendChild(empty);
+        return;
+      }
+
+      matches.forEach(p => {
+        const row = document.createElement('div');
+        row.className = 'ps-result';
+        row.innerHTML = `<span class="ps-name">${p.nombre}</span><a class="btn" href="${p.link}" target="_blank" rel="noopener">Abrir carpeta →</a>`;
+        photoResults.appendChild(row);
+      });
+    });
+  }
+
   // Buscador: filtra secciones por palabras clave
   const input = document.getElementById('searchInput');
   const sections = Array.from(document.querySelectorAll('section.block'));
